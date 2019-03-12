@@ -1,8 +1,21 @@
 const origin = 'http://localhost:3000/users'
 
+var home = Vue.component('home', {
+    template: '#home-template'
+})
+
+var login = Vue.component('login', {
+    template: '.login-popup-template'
+})
+
+var addBlog = Vue.component('add-blog', {
+    template: '#add-blog-temlate'
+}) 
+
 const appUser = new Vue({
     el: '#app',
     data: {
+        currentView: 'home',
         person: {
             firstName: '',
             lastName: '',
@@ -10,6 +23,11 @@ const appUser = new Vue({
             username: '',
             password: ''
         }
+    },
+    component:{
+        home: home,
+        login: login,
+        addBlog: addBlog
     },
     methods: {
         addUser: function() {
@@ -35,3 +53,8 @@ const appUser = new Vue({
         }
     }
 })
+
+
+
+
+

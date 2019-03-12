@@ -46,13 +46,24 @@
                     </div>
                     <div class="top-menu">
                         <div class="tmenu-container" v-if="">
-                            <ul>
+                            <!-- <ul>
                                 <li class="login"><a href="#login" class="login" onclick="document.getElementById('login-wrapper').style.display='block'">Login</a></li>
 
                                 <li class="register"><a href="#register" onclick="document.getElementById('register-wrapper').style.display='block'">Register</a></li>
                                 
                                 <li class="logout"><a href="#">Logout</a></li>
+                            </ul> -->
+
+
+                            <ul>
+                                <li class="login"><a href="#login" @click="currentView='login'">Login</a></li>
+
+                                <li class="register"><a href="#register" onclick="document.getElementById('register-wrapper').style.display='block'">Register</a></li>
+                                
+                                <li class="logout"><a href="#">Logout</a></li>
                             </ul>
+
+
                         </div>
                         <div class="search-box">
                             <form class="search-box">
@@ -98,7 +109,7 @@
         </div>
 
         <!-- Main Start -->
-        <template id="home">
+        <template id="home-template">
             <div class="slider">
                 <div class="main-slider">
                     <figure>
@@ -130,7 +141,7 @@
         </template>
         <!-- Footer End -->
         <!-- Login PopUp Start -->
-        <div class="login-popup">
+        <div class="login-popup-template">
             <div id="login-wrapper" class="modal">
                 <div class="modal-content animate">     
                     <div class="imgcontainer">
@@ -171,7 +182,7 @@
         </div>
         <!-- Register End -->
         <!-- Add Blog Start -->
-        <template id="add-blog">
+        <template id="add-blog-template">
             <div class="form-add-blog">
                 <form action="">
 
