@@ -2,6 +2,10 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 
+// router
+const userRouter = require('./routers/userRouter')
+const articleRouter = require('./routers/articleRouter')
+
 // dotenv
 const ENV = require('dotenv')
 ENV.config()
@@ -9,28 +13,23 @@ ENV.config()
 // port
 const port = Number(process.env.PORT)
 
-// bodyparser
-app.use(cors())
+// body parser
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
+app.use(cors())
 
-// home
-app.get('/', (req, res) => {
+// router set
+app.use('/user', userRouter)
+app.use('/article', articleRouter)
 
-})
-
-const userRouters = require('./routers/userRouter')
-
-// express set router
-app.use('/users', userRouters)
-
-// no page found
+// get page not found
 app.get('*', (req, res) => {
     res.status(404).json({
-        message: "PAGE NOT FOUND"
+        message: 'PAGE NOT FOUND'
     })
 })
 
-app.listen(port, () => [
-    console.log('SERVER IS ON AND LISTEN TO PORT ', port)
-])
+// app listen
+app.listen(port, () => {
+    console.log('SERVER IS ON AND LISTEN TO PORT', port)
+})

@@ -3,201 +3,102 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Home - My Blog</title>
+    <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" media="screen" href="./stylesheet/main.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="./stylesheet/slider.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="./stylesheet/popup.css">
-
-    <!-- JQuery -->
     <script
         src="http://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous">
     </script>
-
-    <!-- Vue-JS -->
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Custom Css -->
+    <link rel="stylesheet" type="text/css" media="screen" href="./stylesheet/main.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="./stylesheet/login-register.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="./stylesheet/style.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="./stylesheet/add-post.css">
+
     <!-- Axios -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-    <!-- tinyMCE DEMO -->
-    <script src="https://cloud.tinymce.com/5/tinymce.min.js?apiKey=80erwew9hugrutwwh7tcuod2lreepb35iwgeoeq7va4d6821"></script>
+    <!-- swal -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
+    <!-- ckEditor -->
+    <script src="https://cdn.ckeditor.com/4.11.3/standard/ckeditor.js"></script>
+
+    <!-- Tags -->
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/vue-input-tag"></script>
 
 </head>
 <body>
     <div id="app">
-        <!-- Header Start -->
-        <template id="header">
-            <!-- Top Bar Start -->
-            <div class="topbar">   
-                <div class="topbar-container">
-                    <div class="slogan">
-                        <div><p>Welcome to my blog</p></div>
-                    </div>
-                    <div class="top-menu">
-                        <div class="tmenu-container" v-if="">
-                            <!-- <ul>
-                                <li class="login"><a href="#login" class="login" onclick="document.getElementById('login-wrapper').style.display='block'">Login</a></li>
-
-                                <li class="register"><a href="#register" onclick="document.getElementById('register-wrapper').style.display='block'">Register</a></li>
-                                
-                                <li class="logout"><a href="#">Logout</a></li>
-                            </ul> -->
-
-
-                            <ul>
-                                <li class="login"><a href="#login" @click="currentView='login'">Login</a></li>
-
-                                <li class="register"><a href="#register" onclick="document.getElementById('register-wrapper').style.display='block'">Register</a></li>
-                                
-                                <li class="logout"><a href="#">Logout</a></li>
-                            </ul>
-
-
-                        </div>
-                        <div class="search-box">
-                            <form class="search-box">
-                                <input type="search">
-                                <i class="fa fa-search"></i>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Top Bar End -->
-            <!-- Main Header Start -->
-            <div class="main-header">
-                <div class="header-container">
-                    <div class="logo">
-                        <a href="/">cek</a>
-                    </div>
-                    <div class="navigation">
-                        <div class="nav">
-                            <ul>
-                                <li><a href="#home" @click="currentView='home'">Home</a></li>
-                                <li><a href="#">Blog</a>
-                                    <ul>
-                                        <li><a href="#">My Blog</a></li>
-                                        <li><a href="#add-blog" @click="currentView='add-blog'">Add New Post</a></li>
-                                        <li><a href="#">Categories</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="">About Me</a></li>
-                                <li><a href="">Faqs</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Main Header End -->
-        </template>
-        <!-- Header End -->
-
-        <div class="container">
-            <component :is="currentView"></component>
-          </div>
+        <div>
+            <home 
+                @go-to-login-page="onClickLogin" 
+                @go-to-register-page="onClickRegister" 
+                @go-logout="onClickLogOut" 
+                @go-blogpost="onClickBlogpost"
+                v-bind:location="location" 
+                v-bind:login="login"
+                v-bind:username="username"
+                v-bind:allpost="allpost">
+            </home>
         </div>
-
-        <!-- Main Start -->
-        <template id="home-template">
-            <div class="slider">
-                <div class="main-slider">
-                    <figure>
-                        <div class="slide">
-                            <img src="./img/01.jpg">
-                        </div>
-                        <div class="slide">
-                            <img src="./img/02.jpg">
-                        </div>
-                        <div class="slide">
-                            <img src="./img/03.jpg">
-                        </div>
-                        <div class="slide">
-                            <img src="./img/04.jpg">
-                        </div>
-                        <div class="slide">
-                            <img src="./img/05.jpg">
-                        </div>
-                    </figure>
-                </div>
-            </div>
-            
-            <br>
-        </template>
-        <!-- Main End -->
-        <!-- Footer Start -->
-        <template id="footer">
-
-        </template>
-        <!-- Footer End -->
-        <!-- Login PopUp Start -->
-        <div class="login-popup-template">
-            <div id="login-wrapper" class="modal">
-                <div class="modal-content animate">     
-                    <div class="imgcontainer">
-                        <span onclick="document.getElementById('login-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
-                        <img src="./assets/img/1.png" alt="Avatar" class="avatar">
-                        <h1 style="text-align:center">LOGIN USER</h1>
-                    </div>
-        
-                    <form class="container" v-on:submit.prevent="loginUser">
-                        <input v-model="person.username" type="text" placeholder="Enter Username" name="username" id="log-username">
-                        <input v-model="person.password" type="password" placeholder="Enter Password" name="password" id="log-password">   
-                        
-                        <input type="submit" value="Login" name="submit-log" id="submit-log" class="submit-data">
-                    </form>
-                </div>
-            </div>
+        <div>
+            <add-login 
+                v-on:user-login="userLogin" 
+                @to-register="onClickRegister" 
+                @to-home="onClickHome" 
+                v-bind:location="location" 
+                v-bind:login="login">
+            </add-login>
         </div>
-        <!-- Login PopUp End -->
-        <!-- Register Start -->
-        <div class="register-popup">
-            <div id="register-wrapper" class="modal">
-                <div class="modal-content animate">     
-                    <div class="imgcontainer">
-                        <span onclick="document.getElementById('register-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
-                        <h1 style="text-align:center">Register User</h1>
-                    </div>
-        
-                    <form class="container" v-on:submit.prevent="addUser">
-                        <input v-model="person.firstName" type="text" placeholder="Enter First Name" name="firstName" id="firstName">
-                        <input v-model="person.lastName" type="text" placeholder="Enter Last Name" name="lastName" id="lastName">
-                        <input v-model="person.email" type="text" placeholder="Enter Email" name="email" id="email">
-                        <input v-model="person.username" type="text" placeholder="Enter Username" name="username" id="username">
-                        <input v-model="person.password" type="password" placeholder="Enter Password" name="password" id="password">    
-                        <input type="submit" value="Register" name="submit-reg" id="submit-reg" class="submit-data">
-                    </form>
-                </div>
-            </div>
+        <div>
+            <add-register 
+                v-on:user-register="userRegister" 
+                @to-login="onClickLogin" 
+                @to-home="onClickHome" 
+                v-bind:location="location" 
+                v-bind:login="login">
+            </add-register>
         </div>
-        <!-- Register End -->
-        <!-- Add Blog Start -->
-        <template id="add-blog-template">
-            <div class="form-add-blog">
-                <form action="">
-
-
-                    <textarea name="" id="mytextarea"></textarea>
-                </form>
-            </div>
-        </template>
-        <!-- Add Blog End -->
+        <div>
+            <add-post-form
+                v-bind:location="location" 
+                v-bind:login="login"
+                v-bind:tags="tags"
+                v-bind:limit='limit'
+                v-bind:content="content">
+            </add-post-form>
+        </div>
     </div>
+
+    <!-- Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    
     <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     
-    <!-- Custom Script -->
+    <!-- Components -->
+    <script src="./js/components/Navbar.js"></script>
+    <script src="./js/components/Slider.js"></script>
+    <script src="./js/components/TextEditor.js"></script>
+    <script src="./js/components/InputTags.js"></script>
+    <script src="./js/components/ListArticle.js"></script>
+    
+    <!-- Views -->
+    <script src="./js/views/Home.js"></script>
+    <script src="./js/views/Login.js"></script>
+    <script src="./js/views/Register.js"></script>
+    <script src="./js/views/AddPost.js"></script>
+    
+    <!-- Vue Init -->
     <script src="./js/main.js"></script>
-    <script src="./js/user.js"></script>
 </body>
 </html>

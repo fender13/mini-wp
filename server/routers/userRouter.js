@@ -1,12 +1,18 @@
 const router = require('express').Router()
-const controller = require('../controllers/userControllers')
+const controller = require('../controllers/userController')
+const authentication = require('../middlewares/authentication')
 
-// create a user
-router.post('/register', controller.createUser)
+// user register 
+router.post('/register', controller.userRegister)
 
-// login user
-router.post('/login', controller.loginUser)
+// user login
+router.post('/login', controller.userLogin)
 
-
+// authenticate user
+router.get('/verify', authentication, (req, res) => {
+    res.status(200).json({
+        messager: 'User is verified'
+    })
+})
 
 module.exports = router
