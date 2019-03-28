@@ -1,1 +1,0 @@
-Vue.component('input-tag', vueInputTag.default)
