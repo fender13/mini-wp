@@ -3,8 +3,8 @@ const mongoose = require('mongoose')
 const ENV = require('dotenv')
 ENV.config()
 
-const dbName = process.env.DB_NAME
-mongoose.connect(`mongodb://localhost/${dbName}`, { useNewUrlParser: true })
+const dbName = process.env.URL_DATABASE
+mongoose.connect(`${dbName}`, { useNewUrlParser: true })
 
 mongoose.set('useFindAndModify', false)
 
